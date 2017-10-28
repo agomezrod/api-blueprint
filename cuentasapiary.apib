@@ -1,0 +1,176 @@
+FORMAT: 1A
+HOST: http://apics.oracle.com:8001/
+
+# Cuentas
+
+El API de cuentas nos da información de las cuentas de un cliente.
+Las operaciones posibles serán:
+- obtener cuentas de un cliente
+- obtener detalles de una cuenta (pdte implementar)
+- obtener transacciones de una cuenta (pdte implementar)
+
+
+## Listado de Cuentas [/accounts/v1/{nif}]
+Este "recurso" sirve para obtener las cuentas de un cliente. 
+Una cuenta tiene los siguientes atributos:
++ customerid
++ status
++ accountid
++ ...
+
+### Cuentas Actuales [GET]
+Acción que utiliza el método **get** para devolver la lista de cuentas de un cliente a partir del NIF del mismo que se le pasa como parámetro.
+Se ha definido una respuesta en formato (application/json) con el código e información.
+
++ Parameters
+    + nif: 48596347V (string) - Nif identificador de cliente.
+    
++ Response 200 (application/json)
+
+        {
+        "result": {
+            "code": 200,
+            "info": "OK"
+        },
+        "data": {
+            "accounts": [
+                {
+                "customerId": 4859634,
+                "status": "activa",
+                "accountid": "ES1182002000000000000000000022841347XXXXXXXXX",
+                "alias": "ALIAS1",
+                "type": "CHECKING",
+                "description": "R4 CHECKING ACCOUNT",
+                "number": "8294",
+                "currency": "EUR",
+                "balance": 12.01,
+                "_updated": "Tue, 07 Feb 2017 21:44:21 GMT",
+                "links": {
+                    "detail": {
+                        "href": "/ES1182002000000000000000000022841347XXXXXXXXX",
+                        "title": "DetalleDeCuenta"
+                        }
+                    }
+                },
+                {
+                "customerId": 4859634,
+                "status": "activa",
+                "accountid": "ES1182002000000000000000000022841348XXXXXXXXX",
+                "alias": "ALIAS2",
+                "type": "CREDIT",
+                "description": "R4 CREDIT ACCOUNT",
+                "number": "4390",
+                "balance": -5,
+                "currency": "USD",
+                "_updated": "Tue, 07 Feb 2017 21:44:21 GMT",
+                "links": {
+                    "detail": {
+                        "href": "/ES1182002000000000000000000022841348XXXXXXXXX",
+                        "title": "DetalleDeCuenta"
+                        }
+                    }
+                },
+                {
+                "customerId": 4859634,
+                "status": "activa",
+                "accountid": "ES1182002000000000000000000022841349XXXXXXXXX",
+                "alias": "ALIAS3",
+                "type": "CHECKING",
+                "description": "R4 CHECKING ACCOUNT",
+                "number": "1040",
+                "balance": 0,
+                "currency": "EUR",
+                "_updated": "Tue, 07 Feb 2017 21:44:21 GMT",
+                "links": {
+                    "detail": {
+                        "href": "/ES1182002000000000000000000022841349XXXXXXXXX",
+                        "title": "DetalleDeCuenta"
+                        }
+                    }
+                }
+            ]
+        }
+        }
+
++ Response 401 (application/json)
+
+        {
+        "result": {
+            "code": 401,
+            "info": "Acceso no autorizado"
+        }
+        }
+        
++ Response 404 (application/json)
+
+        {
+        "result": {
+            "code": 404,
+            "info": "Identificador de cliente no existe"
+        }
+        }
+
++ Response 500 (application/json)
+
+        {
+        "result": {
+            "code": 500,
+            "info": "Error interno"
+        }
+        }
+
+## Detalle de Cuenta [/accounts/v1/{accountid}]
+
+### Informacion de Cuenta  [GET]
+Devuelve la informacion de una cuenta de un cliente a partir del identificador de cuenta.
+
++ Parameters
+    + accountid: ES1182002000000000000000000022841349XXXXXXXXX (number) - Identificador de cuenta.
+    
++ Response 200 (application/json)
+
+                {
+                "customerId": 4859634,
+                "status": "activa",
+                "accountid": "ES1182002000000000000000000022841349XXXXXXXXX",
+                "alias": "ALIAS3",
+                "type": "CHECKING",
+                "description": "BBVA CHECKING ACCOUNT",
+                "number": "1040",
+                "balance": 0,
+                "currency": "EUR",
+                "_updated": "Tue, 07 Feb 2017 21:44:21 GMT",
+                "links": {
+                    "detail": {
+                        "href": "/ES1182002000000000000000000022841349XXXXXXXXX",
+                        "title": "DetalleDeCuenta"
+                        }
+                    }
+                }
+
++ Response 401 (application/json)
+
+        {
+        "result": {
+            "code": 401,
+            "info": "Acceso no autorizado"
+        }
+        }
+        
++ Response 404 (application/json)
+
+        {
+        "result": {
+            "code": 404,
+            "info": "Identificador de cliente no existe"
+        }
+        }
+
++ Response 500 (application/json)
+
+        {
+        "result": {
+            "code": 500,
+            "info": "Error interno"
+        }
+        }
