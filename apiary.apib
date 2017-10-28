@@ -1,0 +1,43 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Aportaciones
+
+Realizar aportaciones a un fondo
+
+## Aporaciones A Fondo [/aportaciones/{clienteNif}]
+
++ Parameters
+
+    + clienteNif: 12345678V (String) - Identificador unico de cliente.
+
+### Crear una nueva aportacion [POST]
+
+Se permiten crear nuevas aportaciones a un fondo.
+
++ Request (application/json)
+
+        {
+            "cuentaOrigen": {
+            "id": "ESXXXXYYYYZZZZZZZZZZZZZZZZ"
+            },
+            "fondoDestino": "name": "NombreDelFondo",
+            "number": "ES12345678912345",
+            },
+            "value":
+            {   
+                "amount": "20000.00",
+                "currency": "EUR"
+            },
+            "description": "Transferencia autorizada"
+        }
+
++ Response 200 (application/json)
+
+            {
+                "result": {
+                    "resultado": "200",
+                    "codigoTransferencia": "234234"
+                },
+                "exit":"ok"
+            }
